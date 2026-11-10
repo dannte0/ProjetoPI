@@ -12,7 +12,7 @@ public class GenericDao
 	{
 		String hostName = "localhost";
 		String dbName = "marketplace";
-        String user = ""; //substituir pelo username do banco de dados
+        String user = "root"; //substituir pelo username do banco de dados
         String senha = ""; // substituir pela senha do banco de dados
         Class.forName("net.sourceforge.jtds.jdbc.Driver");
 		c = DriverManager.getConnection(
