@@ -34,13 +34,6 @@ descricao	VARCHAR(255)						NOT NULL,
 PRIMARY KEY (id)
 )
 
-CREATE TABLE Status
-(
-id			INT					IDENTITY		NOT NULL,
-descricao	VARCHAR(20)							NOT NULL,
-
-PRIMARY KEY (id)
-)
 GO
 
 CREATE TABLE Anuncio
@@ -72,14 +65,13 @@ CREATE TABLE Produto
 id				INT					IDENTITY		NOT NULL,
 id_anuncio		INT									NOT NULL,
 id_categoria	INT									NOT NULL,
-id_status		INT									NOT NULL,
+status			VARCHAR(50)							NOT NULL,
 nome			VARCHAR(150)						NOT NULL,
 descricao		VARCHAR(255)						NOT NULL,
 
 PRIMARY KEY (id),
 FOREIGN KEY (id_anuncio) REFERENCES Anuncio(id),
 FOREIGN KEY (id_categoria) REFERENCES Categoria(id),
-FOREIGN KEY (id_status) REFERENCES Status(id)
 )
 
 CREATE TABLE Favorito
