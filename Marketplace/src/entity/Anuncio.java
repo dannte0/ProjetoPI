@@ -4,13 +4,15 @@ public class Anuncio
 {
 	private int id;
 	private double valor;
-	private int id_vendedor;
+	private String status;
+	private int id_usuario;
 	
 	public Anuncio() 
 	{
 		this.id = 0;
-		this.valor = 0.00d;	
-		this.setId_vendedor(0);
+		this.valor = 0.00d;
+		this.status = "";
+		this.setId_usuario(0);
 	}
 
 	public int getId() 
@@ -33,13 +35,23 @@ public class Anuncio
 		this.valor = valor;
 	}
 
-	public int getId_vendedor() 
+	public String getStatus()
 	{
-		return id_vendedor;
+		return status;
 	}
 
-	public void setId_vendedor(int id_vendedor) 
+	public void setStatus(String status) 
 	{
-		this.id_vendedor = id_vendedor;
+		this.status = status;
+	}
+
+	public int getId_usuario() 
+	{
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) 
+	{
+		this.id_usuario = id_usuario;
 	}
 }
