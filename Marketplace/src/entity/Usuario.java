@@ -6,6 +6,7 @@ public class Usuario
 	private String nome;
 	private String email;
 	private String senha;
+	private String CPF;
 	private String telefone;
 	
 	public Usuario() 
@@ -65,6 +66,15 @@ public class Usuario
 	public void setTelefone(String telefone)
 	{
 		this.telefone = telefone;
+	}	
+	
+	public String getCPF() 
+	{
+		return this.CPF;
 	}
 	
+	public void setCPF(String cpf) 
+	{
+		this.CPF = cpf;
+	}
 }
