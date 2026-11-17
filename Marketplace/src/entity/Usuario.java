@@ -15,6 +15,7 @@ public class Usuario
 		this.nome = "";
 		this.email = "";
 		this.senha = "";
+		this.CPF = "";
 		this.telefone = "";
 	}
 	
