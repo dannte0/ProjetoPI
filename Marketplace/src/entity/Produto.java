@@ -7,7 +7,8 @@ public class Produto
 	private String descricao;
 	private String status;
 	private int id_categoria;
-	private int id_anuncio;
+	private String nome_categoria;
+//	private int id_anuncio;
 	
 	public int getId() 
 	{
@@ -19,16 +20,16 @@ public class Produto
 		this.id = id;
 	}
 	
-	public int getId_anuncio() 
-	{
-		return id_anuncio;
-	}
-	
-	public void setId_anuncio(int id_anuncio) 
-	{
-		this.id_anuncio = id_anuncio;
-	}
-	
+//	public int getId_anuncio() 
+//	{
+//		return id_anuncio;
+//	}
+//	
+//	public void setId_anuncio(int id_anuncio) 
+//	{
+//		this.id_anuncio = id_anuncio;
+//	}
+//	
 	public int getId_categoria() 
 	{
 		return id_categoria;
@@ -67,5 +68,15 @@ public class Produto
 	public void setDescricao(String descricao) 
 	{
 		this.descricao = descricao;
+	}
+
+	public String getNome_categoria() 
+	{
+		return nome_categoria;
+	}
+
+	public void setNome_categoria(String nome_categoria) 
+	{
+		this.nome_categoria = nome_categoria;
 	}
 }

@@ -67,7 +67,7 @@ id_anuncio		INT										NOT NULL,
 id_categoria	INT										NOT NULL,
 nome			VARCHAR(150)							NOT NULL,
 descricao		VARCHAR(255)							NOT NULL,
-status			VARCHAR(50)			DEFAULT('ATIVO')	NOT NULL,
+status			VARCHAR(50)			DEFAULT('INATIVO')	NOT NULL,
 
 PRIMARY KEY (id),
 FOREIGN KEY (id_anuncio) REFERENCES Anuncio(id),
