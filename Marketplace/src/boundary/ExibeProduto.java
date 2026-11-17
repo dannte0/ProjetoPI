@@ -30,6 +30,7 @@ public class ExibeProduto extends JFrame {
 	private JPanel contentPane;
 	protected JTextField textFieldProdutoID;
 	private ProdutoController pc = new ProdutoController();
+	private CategoriaController cc = new CategoriaController();
 	protected JTextField textFieldNome;
 	protected JTextField textFieldStatus;
 	protected JTextArea textAreaDesc;
@@ -88,14 +89,16 @@ public class ExibeProduto extends JFrame {
 				try
 				{
 					Produto p = new Produto();
+					Categoria c = new Categoria();
 					
 					p.setId(Integer.parseInt(textFieldProdutoID.getText()));
 					
 					p = pc.findOneProduto(p);
+					c = cc.findOneCategoria(p.getId_categoria());
 					
 					textFieldNome.setText(p.getNome());
-					textFieldNomeCategoria.setText(p.getNome_categoria());
-					textFieldStatus.setText(p.getStatus());
+					textFieldNomeCategoria.setText(c.getNome());
+//					textFieldStatus.setText(p.getStatus());
 					textAreaDesc.setText(p.getDescricao());
 			
 					
@@ -146,9 +149,6 @@ public class ExibeProduto extends JFrame {
 		lblCategoria.setBounds(33, 139, 126, 14);
 		contentPane.add(lblCategoria);
 		
-		lblNewLabel = new JLabel("Status:");
-		lblNewLabel.setBounds(499, 59, 46, 14);
-		contentPane.add(lblNewLabel);
 		
 		lblProdutoID = new JLabel("Id do Produto:");
 		lblProdutoID.setBounds(33, 21, 78, 14);
@@ -202,7 +202,7 @@ public class ExibeProduto extends JFrame {
 					p.setNome(textFieldNome.getText());
 					p.setDescricao(textAreaDesc.getText());
 					p.setId_categoria(c.getId());
-					p.setStatus(textFieldStatus.getText());
+//					p.setStatus(textFieldStatus.getText());
 					
 					pc.updateProduto(p);
 					JOptionPane.showMessageDialog(null,
