@@ -21,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
+import controller.CategoriaController;
 import controller.ProdutoController;
+import entity.Categoria;
 import entity.Produto;
 
 public class ListaProduto extends JFrame {
@@ -30,10 +32,14 @@ public class ListaProduto extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	ProdutoController pc = new ProdutoController();
+	CategoriaController cc = new CategoriaController();
 	private JButton btnNewButton;
+	private static final int COL_ACOES = 7;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
 			public void run() {
 				try {
 					ListaProduto frame = new ListaProduto();
@@ -46,15 +52,16 @@ public class ListaProduto extends JFrame {
 	}
 
 	public ListaProduto() {
+		setTitle("Listagem de produtos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 819, 500);
+		setBounds(100, 100, 1110, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 51, 783, 399);
+		scrollPane.setBounds(10, 51, 1074, 399);
 		contentPane.add(scrollPane);
 
 		JButton btnMenu = new JButton("Menu");
@@ -82,7 +89,7 @@ public class ListaProduto extends JFrame {
 				}
 			}
 		});
-		btnMenu.setBounds(517, 11, 78, 34);
+		btnMenu.setBounds(1006, 6, 78, 34);
 		contentPane.add(btnMenu);
 		
 		table = new JTable();
@@ -90,20 +97,20 @@ public class ListaProduto extends JFrame {
 		table.setModel(new DefaultTableModel(
 			new Object[][] {},
 			new String[] {
-				"ID", "Produto", "Descricao", "Categoria", "Status", "A\u00E7\u00F5es"
+				"ID", "Produto", "Descricao", "Categoria", "Marca", "Condição", "Cor", "A\u00E7\u00F5es"
 			}
 		) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				return column == 5;
+				return column == COL_ACOES;
 			}
 		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(15);
-		table.getColumnModel().getColumn(5).setPreferredWidth(170);
-		table.getColumnModel().getColumn(5).setCellRenderer(new AcoesRenderer());
-		table.getColumnModel().getColumn(5).setCellEditor(new AcoesEditor());
+		table.getColumnModel().getColumn(COL_ACOES).setPreferredWidth(170);
+		table.getColumnModel().getColumn(COL_ACOES).setCellRenderer(new AcoesRenderer());
+		table.getColumnModel().getColumn(COL_ACOES).setCellEditor(new AcoesEditor());
 		scrollPane.setViewportView(table);
 
 		btnNewButton = new JButton("Listar Produtos");
@@ -116,23 +123,31 @@ public class ListaProduto extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(264, 11, 133, 23);
+		btnNewButton.setBounds(10, 12, 156, 23);
 		contentPane.add(btnNewButton);
 	}
 
-	private void listarTabela() throws ClassNotFoundException, SQLException {
+	private void listarTabela() throws ClassNotFoundException, SQLException 
+	{
 		try {
 			List<Produto> lista = pc.findAllProduto();
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (Produto produto : lista) {
-				Object[] linha = new Object[6];
+				Categoria c = new Categoria();
+				
+				c.setId(produto.getId_categoria());
+				c = cc.findOneCategoria(c.getId());
+				
+				Object[] linha = new Object[9];
 				linha[0] = produto.getId();
 				linha[1] = produto.getNome();
 				linha[2] = produto.getDescricao();
-				linha[3] = produto.getNome_categoria();
-				linha[4] = produto.getStatus();
-				linha[5] = "";
+				linha[3] = c.getNome();
+				linha[4] = produto.getMarca();
+				linha[5] = produto.getCondicao();
+				linha[6] = produto.getCor();
+				linha[COL_ACOES] = "";
 				model.addRow(linha);
 			}
 		} catch (Exception exc) {
@@ -146,25 +161,41 @@ public class ListaProduto extends JFrame {
 		try 
 		{
 			Produto p = new Produto();
-			tela = new ExibeProduto();
-			tela.setVisible(true);
+			Categoria c = new Categoria();
 			p.setId(id);
 			p = pc.findOneProduto(p);
-			//tela.textFieldProdutoID.setText(String.valueOf(id));
-			tela.textFieldNome.setText(p.getNome());
-			tela.textFieldNome.setEditable(true);
-//			tela.textFieldNomeCategoria.setText(p.getNome_categoria());
-//			tela.textFieldNomeCategoria.setEditable(true);
+			c = cc.findOneCategoria(p.getId_categoria());
+			tela = new ExibeProduto();
+			tela.setTitle("Editando produto: "+ p.getNome());
+			tela.setVisible(true);
+		
+			//Nome do Produto
+			tela.textFieldNomeProduto.setText(p.getNome());
+			tela.textFieldNomeProduto.setEditable(true);
+			//Categoria
 			tela.textFieldNomeCategoria.setVisible(false);
-			tela.textFieldStatus.setText(p.getStatus());
-			tela.textFieldStatus.setEditable(true);
-			tela.textAreaDesc.setText(p.getDescricao());
-			tela.textAreaDesc.setEditable(true);
 			tela.comboBoxCategoriaProduto.setEnabled(true);
+			tela.comboBoxCategoriaProduto.setSelectedIndex(c.getId());
+			//Descricao
+			tela.textAreaDescricaoProduto.setText(p.getDescricao());
+			tela.textAreaDescricaoProduto.setEditable(true);
+			//Marca
+			tela.textFieldMarcaProduto.setText(p.getMarca());
+			tela.textFieldMarcaProduto.setEditable(true);
+			//Cor
+			tela.textFieldCorProduto.setText(p.getCor());
+			tela.textFieldCorProduto.setEditable(true);
+			//Condicao
+			tela.textFieldCondicaoProduto.setVisible(false);
+			tela.comboBoxCondicaoProduto.setVisible(true);
+			tela.comboBoxCondicaoProduto.setEnabled(true);
+			tela.comboBoxCondicaoProduto.setSelectedItem((String) p.getCondicao());
+			//ID produto
 			tela.lblProdutoID.setVisible(false);
 			tela.textFieldProdutoID.setVisible(false);
 			tela.textFieldProdutoID.setText(String.valueOf(id));
 			tela.btnBuscar.setVisible(false);
+			//Botao de enviar
 			tela.btnEnviar.setVisible(true);
 			
 			dispose();

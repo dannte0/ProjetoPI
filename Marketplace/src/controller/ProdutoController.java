@@ -17,12 +17,15 @@ public class ProdutoController
 	public void createProduto(Produto p) throws ClassNotFoundException, SQLException
 	{
 		Connection conn = gDao.getConnection();
-		String sql = "INSERT INTO Produto (nome, descricao, id_categoria) VALUES(?,?,?)";
+		String sql = "INSERT INTO Produto (nome, descricao, id_categoria, marca, condicao, cor) VALUES(?,?,?,?,?,?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
 		ps.setString(1, p.getNome());
 		ps.setString(2, p.getDescricao());
 		ps.setInt(3, p.getId_categoria());
+		ps.setString(4, p.getMarca());
+		ps.setString(5, p.getCondicao());
+		ps.setString(6, p.getCor());
 		ps.execute();
 	    ps.close();
 	    conn.close();
@@ -43,13 +46,15 @@ public class ProdutoController
 	public void updateProduto(Produto p) throws ClassNotFoundException, SQLException
 	{
 		Connection conn = gDao.getConnection();
-		String sql = "UPDATE produto SET nome = ?, descricao = ?, status = ?, id_categoria = ? WHERE id = ?";
+		String sql = "UPDATE produto SET nome = ?, descricao = ?, marca = ?, id_categoria = ?, condicao = ?, cor = ? WHERE id = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, p.getNome());
 		ps.setString(2, p.getDescricao());
-		ps.setString(3, p.getStatus());
+		ps.setString(3, p.getMarca());
 		ps.setInt(4, p.getId_categoria());
-		ps.setInt(5, p.getId());
+		ps.setString(5, p.getCondicao());
+		ps.setString(6, p.getCor());
+		ps.setInt(7, p.getId());
 		ps.execute();
 		ps.close();
 		conn.close();
@@ -58,7 +63,7 @@ public class ProdutoController
 	public Produto findOneProduto(Produto p) throws ClassNotFoundException, SQLException
 	{
 		Connection conn = gDao.getConnection();
-		String sql = "SELECT produto.nome, produto.descricao, produto.status, categoria.nome AS cat FROM produto INNER JOIN categoria ON produto.id_categoria = categoria.id WHERE produto.id = ?";
+		String sql = "SELECT nome, descricao, marca, id_categoria, condicao, cor FROM produto WHERE id = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setInt(1, p.getId());
@@ -67,8 +72,10 @@ public class ProdutoController
 		{
 			p.setNome(rs.getString("nome"));
 			p.setDescricao(rs.getString("descricao"));
-			p.setStatus(rs.getString("status"));
-			p.setNome_categoria(rs.getString("cat"));
+			p.setMarca(rs.getString("marca"));
+			p.setId_categoria(rs.getInt("id_categoria"));
+			p.setCondicao(rs.getString("condicao"));
+			p.setCor(rs.getString("cor"));
 		}
 		rs.close();
 		ps.close();
@@ -80,7 +87,7 @@ public class ProdutoController
 	{
 		List<Produto> lista = new ArrayList<>();
 		Connection conn = gDao.getConnection();
-		String sql = "SELECT produto.id, produto.nome, produto.descricao, produto.status, categoria.nome AS cat FROM produto INNER JOIN categoria ON produto.id_categoria = categoria.id";
+		String sql = "SELECT id, nome, descricao, marca, id_categoria, condicao, cor FROM produto";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next())
@@ -90,8 +97,10 @@ public class ProdutoController
 			p.setId(rs.getInt("id"));
 			p.setNome(rs.getString("nome"));
 			p.setDescricao(rs.getString("descricao"));
-			p.setStatus(rs.getString("status"));
-			p.setNome_categoria(rs.getString("cat"));
+			p.setMarca(rs.getString("marca"));
+			p.setId_categoria(rs.getInt("id_categoria"));
+			p.setCondicao(rs.getString("condicao"));
+			p.setCor(rs.getString("cor"));
 				
 			lista.add(p);
 		}

@@ -35,8 +35,10 @@ public class MenuInicial extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param title 
 	 */
 	public MenuInicial() {
+		setTitle("Menu principal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 830, 500);
 		contentPane = new JPanel();

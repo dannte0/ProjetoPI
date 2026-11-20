@@ -5,10 +5,10 @@ public class Produto
 	private int id;
 	private String nome;
 	private String descricao;
-	private String status;
 	private int id_categoria;
-	private String nome_categoria;
-//	private int id_anuncio;
+	private String marca;
+	private String condicao;
+	private String cor;
 	
 	public int getId() 
 	{
@@ -20,16 +20,6 @@ public class Produto
 		this.id = id;
 	}
 	
-//	public int getId_anuncio() 
-//	{
-//		return id_anuncio;
-//	}
-//	
-//	public void setId_anuncio(int id_anuncio) 
-//	{
-//		this.id_anuncio = id_anuncio;
-//	}
-//	
 	public int getId_categoria() 
 	{
 		return id_categoria;
@@ -38,16 +28,6 @@ public class Produto
 	public void setId_categoria(int id_categoria) 
 	{
 		this.id_categoria = id_categoria;
-	}
-	
-	public String getStatus() 
-	{
-		return status;
-	}
-	
-	public void setStatus(String status) 
-	{
-		this.status = status;
 	}
 	
 	public String getNome() 
@@ -69,14 +49,35 @@ public class Produto
 	{
 		this.descricao = descricao;
 	}
-
-	public String getNome_categoria() 
+	
+	public String getMarca() 
 	{
-		return nome_categoria;
+		return marca;
 	}
 
-	public void setNome_categoria(String nome_categoria) 
+	public void setMarca(String marca) 
 	{
-		this.nome_categoria = nome_categoria;
+		this.marca = marca;
 	}
+
+	public String getCondicao() 
+	{
+		return condicao;
+	}
+
+	public void setCondicao(String condicao) 
+	{
+		this.condicao = condicao;
+	}
+
+	public String getCor() 
+	{
+		return cor;
+	}
+
+	public void setCor(String cor) 
+	{
+		this.cor = cor;
+	}
+
 }

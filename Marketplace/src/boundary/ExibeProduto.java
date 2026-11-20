@@ -23,6 +23,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
+import java.awt.Font;
+import javax.swing.DefaultComboBoxModel;
 
 public class ExibeProduto extends JFrame {
 
@@ -30,20 +32,23 @@ public class ExibeProduto extends JFrame {
 	private JPanel contentPane;
 	protected JTextField textFieldProdutoID;
 	private ProdutoController pc = new ProdutoController();
-	protected JTextField textFieldNome;
-	protected JTextField textFieldStatus;
-	protected JTextArea textAreaDesc;
+	private CategoriaController cc = new CategoriaController();
+	protected JTextField textFieldNomeProduto;
+	protected JTextField textFieldCorProduto;
+	protected JTextArea textAreaDescricaoProduto;
 	protected JTextField textFieldNomeCategoria;
 	private JLabel lblNomeProduto;
 	private JLabel lblCategoria;
-	private JLabel lblNewLabel;
 	protected JLabel lblProdutoID;
 	private JButton btnMenu;
 	protected JButton btnBuscar;
 	private JLabel lblDesc;
 	protected JButton btnEnviar;
+	protected JComboBox<String> comboBoxCondicaoProduto;
 	protected JComboBox<Categoria> comboBoxCategoriaProduto;
-	private JTextField textFieldCategoriaProduto;
+	protected JTextField textFieldCategoriaProduto;
+	protected JTextField textFieldMarcaProduto;
+	protected JTextField textFieldCondicaoProduto;
 
 	/**
 	 * Launch the application.
@@ -63,12 +68,15 @@ public class ExibeProduto extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param title 
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public ExibeProduto() throws ClassNotFoundException, SQLException {
+	public ExibeProduto() throws ClassNotFoundException, SQLException 
+	{
+		setTitle("Procura um produto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 651, 449);
+		setBounds(100, 100, 850, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,7 +84,7 @@ public class ExibeProduto extends JFrame {
 		
 		
 		textFieldProdutoID = new JTextField();
-		textFieldProdutoID.setBounds(121, 11, 126, 34);
+		textFieldProdutoID.setBounds(147, 11, 126, 34);
 		contentPane.add(textFieldProdutoID);
 		textFieldProdutoID.setColumns(10);
 		
@@ -88,16 +96,20 @@ public class ExibeProduto extends JFrame {
 				try
 				{
 					Produto p = new Produto();
+					Categoria c = new Categoria();
 					
 					p.setId(Integer.parseInt(textFieldProdutoID.getText()));
 					
 					p = pc.findOneProduto(p);
+					c = cc.findOneCategoria(p.getId_categoria());
 					
-					textFieldNome.setText(p.getNome());
-					textFieldNomeCategoria.setText(p.getNome_categoria());
-					textFieldStatus.setText(p.getStatus());
-					textAreaDesc.setText(p.getDescricao());
-			
+					textFieldNomeProduto.setText(p.getNome());
+					textFieldNomeCategoria.setText(c.getNome());
+					textFieldCorProduto.setText(p.getCor());
+					comboBoxCategoriaProduto.setSelectedIndex(p.getId_categoria());
+					textAreaDescricaoProduto.setText(p.getDescricao());
+					textFieldMarcaProduto.setText(p.getMarca());
+					textFieldCondicaoProduto.setText(p.getCondicao());
 					
 				}
 				catch(Exception exc)
@@ -111,47 +123,47 @@ public class ExibeProduto extends JFrame {
 			
 			}
 		});
-		btnBuscar.setBounds(257, 11, 87, 34);
+		btnBuscar.setBounds(305, 11, 87, 34);
 		contentPane.add(btnBuscar);
 		
-		textFieldNome = new JTextField();
-		textFieldNome.setEditable(false);
-		textFieldNome.setEditable(false);
-		textFieldNome.setBounds(33, 84, 306, 34);
-		contentPane.add(textFieldNome);
-		textFieldNome.setColumns(10);
+		textFieldNomeProduto = new JTextField();
+		textFieldNomeProduto.setEditable(false);
+		textFieldNomeProduto.setEditable(false);
+		textFieldNomeProduto.setBounds(34, 84, 340, 34);
+		contentPane.add(textFieldNomeProduto);
+		textFieldNomeProduto.setColumns(10);
 		
 		textFieldNomeCategoria = new JTextField();
 		textFieldNomeCategoria.setEditable(false);
-		textFieldNomeCategoria.setBounds(33, 164, 306, 34);
+		textFieldNomeCategoria.setBounds(437, 84, 372, 34);
 		contentPane.add(textFieldNomeCategoria);
 		textFieldNomeCategoria.setColumns(10);
 		
-		textFieldStatus = new JTextField();
-		textFieldStatus.setEditable(false);
-		textFieldStatus.setBounds(499, 84, 100, 34);
-		contentPane.add(textFieldStatus);
+		textFieldCorProduto = new JTextField();
+		textFieldCorProduto.setEditable(false);
+		textFieldCorProduto.setBounds(34, 173, 233, 34);
+		contentPane.add(textFieldCorProduto);
 		
-		textAreaDesc = new JTextArea();
-		textAreaDesc.setEditable(false);
-		textAreaDesc.setBounds(33, 230, 565, 128);
-		textAreaDesc.setColumns(10);
-		contentPane.add(textAreaDesc);
+		textAreaDescricaoProduto = new JTextArea();
+		textAreaDescricaoProduto.setEditable(false);
+		textAreaDescricaoProduto.setBounds(34, 313, 775, 173);
+		textAreaDescricaoProduto.setColumns(10);
+		contentPane.add(textAreaDescricaoProduto);
 		
 		lblNomeProduto = new JLabel("Produto:");
-		lblNomeProduto.setBounds(33, 59, 63, 14);
+		lblNomeProduto.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblNomeProduto.setBounds(34, 58, 63, 14);
 		contentPane.add(lblNomeProduto);
 		
 		lblCategoria = new JLabel("Categoria:");
-		lblCategoria.setBounds(33, 139, 126, 14);
+		lblCategoria.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblCategoria.setBounds(437, 58, 126, 14);
 		contentPane.add(lblCategoria);
 		
-		lblNewLabel = new JLabel("Status:");
-		lblNewLabel.setBounds(499, 59, 46, 14);
-		contentPane.add(lblNewLabel);
 		
 		lblProdutoID = new JLabel("Id do Produto:");
-		lblProdutoID.setBounds(33, 21, 78, 14);
+		lblProdutoID.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblProdutoID.setBounds(33, 21, 120, 14);
 		contentPane.add(lblProdutoID);
 //		carregarCategorias();
 		
@@ -180,11 +192,12 @@ public class ExibeProduto extends JFrame {
 				}
 			}
 		});	
-		btnMenu.setBounds(517, 11, 78, 34);
+		btnMenu.setBounds(731, 11, 78, 34);
 		contentPane.add(btnMenu);
 		
 		lblDesc = new JLabel("Descrição:");
-		lblDesc.setBounds(33, 205, 63, 14);
+		lblDesc.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblDesc.setBounds(33, 276, 100, 14);
 		contentPane.add(lblDesc);
 		
 		btnEnviar = new JButton("Enviar");
@@ -192,26 +205,27 @@ public class ExibeProduto extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				ListaProduto tela;
 				try 
 				{
 					Produto p = new Produto();
 					Categoria c = (Categoria) comboBoxCategoriaProduto.getSelectedItem();
+					String condicao = (String) comboBoxCondicaoProduto.getSelectedItem();
 					
 					p.setId(Integer.parseInt(textFieldProdutoID.getText()));
-					p.setNome(textFieldNome.getText());
-					p.setDescricao(textAreaDesc.getText());
+					p.setNome(textFieldNomeProduto.getText());
+					p.setDescricao(textAreaDescricaoProduto.getText());
 					p.setId_categoria(c.getId());
-					p.setStatus(textFieldStatus.getText());
+					p.setCor(textFieldCorProduto.getText());
+					p.setMarca(textFieldMarcaProduto.getText());
+					p.setCondicao(condicao);
 					
 					pc.updateProduto(p);
 					JOptionPane.showMessageDialog(null,
 		                    "Produto Atualizado com Sucesso",
 		                    "SUCESSO",
 		                    JOptionPane.INFORMATION_MESSAGE);
-					tela = new ListaProduto();
-					tela.setVisible(true);
-					dispose();
+					
+					limpaCampos();
 					
 				} 
 				catch (Exception exc) 
@@ -224,13 +238,45 @@ public class ExibeProduto extends JFrame {
 				}
 			}
 		});
-		btnEnviar.setBounds(499, 369, 100, 30);
+		btnEnviar.setBounds(709, 506, 100, 30);
 		btnEnviar.setVisible(false);
 		contentPane.add(btnEnviar);
 		
 		comboBoxCategoriaProduto = new JComboBox<>();
-		comboBoxCategoriaProduto.setBounds(33, 164, 306, 34);
+		comboBoxCategoriaProduto.setBounds(437, 84, 372, 34);
 		contentPane.add(comboBoxCategoriaProduto);
+		
+		JLabel lblCorProduto = new JLabel("Cor:");
+		lblCorProduto.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblCorProduto.setBounds(34, 151, 63, 14);
+		contentPane.add(lblCorProduto);
+		
+		textFieldMarcaProduto = new JTextField();
+		textFieldMarcaProduto.setEditable(false);
+		textFieldMarcaProduto.setBounds(305, 173, 239, 34);
+		contentPane.add(textFieldMarcaProduto);
+		
+		textFieldCondicaoProduto = new JTextField();
+		textFieldCondicaoProduto.setEditable(false);
+		textFieldCondicaoProduto.setBounds(576, 173, 233, 34);
+		contentPane.add(textFieldCondicaoProduto);
+		
+		JLabel lblMarcaProduto = new JLabel("Marca:");
+		lblMarcaProduto.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblMarcaProduto.setBounds(305, 152, 63, 14);
+		contentPane.add(lblMarcaProduto);
+		
+		comboBoxCondicaoProduto = new JComboBox<String>();
+		comboBoxCondicaoProduto.setFont(new Font("Arial", Font.PLAIN, 12));
+		comboBoxCondicaoProduto.setModel(new DefaultComboBoxModel<>(new String[] {"USADO", "NOVO", "SEMI-NOVO"}));
+		comboBoxCondicaoProduto.setBounds(576, 173, 233, 34);
+		comboBoxCondicaoProduto.setVisible(false);
+		contentPane.add(comboBoxCondicaoProduto);
+		
+		JLabel lblCondicaoProduto = new JLabel("Condicao:");
+		lblCondicaoProduto.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblCondicaoProduto.setBounds(576, 151, 87, 14);
+		contentPane.add(lblCondicaoProduto);
 		carregarCategorias();
 		
 		
@@ -239,12 +285,23 @@ public class ExibeProduto extends JFrame {
 	{
 		CategoriaController catCtr = new CategoriaController();
 		List<Categoria> categorias = catCtr.findAllCategoria();
-        for (Categoria c : categorias) {
+        for (Categoria c : categorias) 
+        {
             comboBoxCategoriaProduto.addItem(c);
         }
 
-        if (comboBoxCategoriaProduto.getItemCount() > 0) {
+        if (comboBoxCategoriaProduto.getItemCount() > 0) 
+        {
             comboBoxCategoriaProduto.setSelectedIndex(0);
         }
+	}
+	private void limpaCampos()
+	{
+		textFieldNomeProduto.setText("");
+		textFieldMarcaProduto.setText("");
+		textFieldCorProduto.setText("");
+		textAreaDescricaoProduto.setText("");
+		comboBoxCondicaoProduto.setSelectedIndex(-1);
+		comboBoxCategoriaProduto.setSelectedIndex(-1);
 	}
 }
