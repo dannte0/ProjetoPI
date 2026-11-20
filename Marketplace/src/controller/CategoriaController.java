@@ -34,7 +34,7 @@ public class CategoriaController
     {
     	List<Categoria> categorias = new ArrayList<>();
         Connection conn = gDao.getConnection();
-        String sql = "SELECT id, nome FROM Categoria ORDER BY nome ASC";
+        String sql = "SELECT id, nome FROM Categoria ORDER BY id ASC";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ResultSet rs = ps.executeQuery();

@@ -36,7 +36,7 @@ public class CadastroProduto extends JFrame {
 	ProdutoController pc = new ProdutoController();
 	private JTextField textFieldCorProduto;
 	private JTextField textFieldMarcaProduto;
-
+	private JTextArea textAreaDescricaoProduto;
 
 	/**
 	 * Launch the application.
@@ -56,10 +56,12 @@ public class CadastroProduto extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param title 
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
 	public CadastroProduto() throws ClassNotFoundException, SQLException {
+		setTitle("Cadastra produtos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 817, 600);
 		contentPane = new JPanel();
@@ -78,7 +80,7 @@ public class CadastroProduto extends JFrame {
 		lblNomeProduto.setBounds(55, 70, 46, 14);
 		contentPane.add(lblNomeProduto);
 		
-		JTextArea textAreaDescricaoProduto = new JTextArea();
+		textAreaDescricaoProduto = new JTextArea();
 		textAreaDescricaoProduto.setFont(new Font("Arial", Font.PLAIN, 12));
 		textAreaDescricaoProduto.setBounds(55, 294, 702, 153);
 		contentPane.add(textAreaDescricaoProduto);
@@ -90,13 +92,13 @@ public class CadastroProduto extends JFrame {
 		
 		comboBoxCategoriaProduto = new JComboBox<>();
 		comboBoxCategoriaProduto.setFont(new Font("Arial", Font.PLAIN, 12));
-		comboBoxCategoriaProduto.setBounds(296, 190, 218, 30);
+		comboBoxCategoriaProduto.setBounds(461, 99, 296, 30);
 		contentPane.add(comboBoxCategoriaProduto);
 		carregarCategorias();
 		
 		JLabel lblCategoriaProduto = new JLabel("Categoria:");
 		lblCategoriaProduto.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblCategoriaProduto.setBounds(296, 165, 89, 14);
+		lblCategoriaProduto.setBounds(461, 70, 89, 14);
 		contentPane.add(lblCategoriaProduto);
 		
 		JButton btnNewButton = new JButton("Cadastrar Produto");
@@ -122,6 +124,7 @@ public class CadastroProduto extends JFrame {
 		                    "Produto Inserido com Sucesso",
 		                    "SUCESSO",
 		                    JOptionPane.INFORMATION_MESSAGE);
+					limpaCampos();
 				}
 				catch(Exception exc)
 				{
@@ -188,12 +191,12 @@ public class CadastroProduto extends JFrame {
 		textFieldMarcaProduto = new JTextField();
 		textFieldMarcaProduto.setFont(new Font("Arial", Font.PLAIN, 12));
 		textFieldMarcaProduto.setColumns(10);
-		textFieldMarcaProduto.setBounds(461, 100, 296, 29);
+		textFieldMarcaProduto.setBounds(296, 191, 218, 29);
 		contentPane.add(textFieldMarcaProduto);
 		
 		JLabel lblMarcaProduto = new JLabel("Marca:");
 		lblMarcaProduto.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblMarcaProduto.setBounds(461, 71, 46, 14);
+		lblMarcaProduto.setBounds(296, 165, 46, 14);
 		contentPane.add(lblMarcaProduto);
 
 	}
@@ -211,5 +214,15 @@ public class CadastroProduto extends JFrame {
         if (comboBoxCategoriaProduto.getItemCount() > 0) {
             comboBoxCategoriaProduto.setSelectedIndex(0);
         }
+	}
+	
+	private void limpaCampos()
+	{
+		textFieldNomeProduto.setText("");
+		textFieldMarcaProduto.setText("");
+		textFieldCorProduto.setText("");
+		textAreaDescricaoProduto.setText("");
+		comboBoxCondicaoProduto.setSelectedIndex(-1);
+		comboBoxCategoriaProduto.setSelectedIndex(-1);
 	}
 }

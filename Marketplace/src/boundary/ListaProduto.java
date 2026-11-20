@@ -36,8 +36,10 @@ public class ListaProduto extends JFrame {
 	private JButton btnNewButton;
 	private static final int COL_ACOES = 7;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
 			public void run() {
 				try {
 					ListaProduto frame = new ListaProduto();
@@ -50,6 +52,7 @@ public class ListaProduto extends JFrame {
 	}
 
 	public ListaProduto() {
+		setTitle("Listagem de produtos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1110, 500);
 		contentPane = new JPanel();
@@ -86,7 +89,7 @@ public class ListaProduto extends JFrame {
 				}
 			}
 		});
-		btnMenu.setBounds(517, 11, 78, 34);
+		btnMenu.setBounds(1006, 6, 78, 34);
 		contentPane.add(btnMenu);
 		
 		table = new JTable();
@@ -120,11 +123,12 @@ public class ListaProduto extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(264, 11, 133, 23);
+		btnNewButton.setBounds(10, 12, 156, 23);
 		contentPane.add(btnNewButton);
 	}
 
-	private void listarTabela() throws ClassNotFoundException, SQLException {
+	private void listarTabela() throws ClassNotFoundException, SQLException 
+	{
 		try {
 			List<Produto> lista = pc.findAllProduto();
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -157,25 +161,41 @@ public class ListaProduto extends JFrame {
 		try 
 		{
 			Produto p = new Produto();
-			tela = new ExibeProduto();
-			tela.setVisible(true);
+			Categoria c = new Categoria();
 			p.setId(id);
 			p = pc.findOneProduto(p);
-			//tela.textFieldProdutoID.setText(String.valueOf(id));
-			tela.textFieldNome.setText(p.getNome());
-			tela.textFieldNome.setEditable(true);
-//			tela.textFieldNomeCategoria.setText(p.getNome_categoria());
-//			tela.textFieldNomeCategoria.setEditable(true);
+			c = cc.findOneCategoria(p.getId_categoria());
+			tela = new ExibeProduto();
+			tela.setTitle("Editando produto: "+ p.getNome());
+			tela.setVisible(true);
+		
+			//Nome do Produto
+			tela.textFieldNomeProduto.setText(p.getNome());
+			tela.textFieldNomeProduto.setEditable(true);
+			//Categoria
 			tela.textFieldNomeCategoria.setVisible(false);
-//			tela.textFieldStatus.setText(p.getStatus());
-			tela.textFieldStatus.setEditable(true);
-			tela.textAreaDesc.setText(p.getDescricao());
-			tela.textAreaDesc.setEditable(true);
 			tela.comboBoxCategoriaProduto.setEnabled(true);
+			tela.comboBoxCategoriaProduto.setSelectedIndex(c.getId());
+			//Descricao
+			tela.textAreaDescricaoProduto.setText(p.getDescricao());
+			tela.textAreaDescricaoProduto.setEditable(true);
+			//Marca
+			tela.textFieldMarcaProduto.setText(p.getMarca());
+			tela.textFieldMarcaProduto.setEditable(true);
+			//Cor
+			tela.textFieldCorProduto.setText(p.getCor());
+			tela.textFieldCorProduto.setEditable(true);
+			//Condicao
+			tela.textFieldCondicaoProduto.setVisible(false);
+			tela.comboBoxCondicaoProduto.setVisible(true);
+			tela.comboBoxCondicaoProduto.setEnabled(true);
+			tela.comboBoxCondicaoProduto.setSelectedItem((String) p.getCondicao());
+			//ID produto
 			tela.lblProdutoID.setVisible(false);
 			tela.textFieldProdutoID.setVisible(false);
 			tela.textFieldProdutoID.setText(String.valueOf(id));
 			tela.btnBuscar.setVisible(false);
+			//Botao de enviar
 			tela.btnEnviar.setVisible(true);
 			
 			dispose();
