@@ -84,11 +84,13 @@ public class ExibeProduto extends JFrame {
 		
 		
 		textFieldProdutoID = new JTextField();
+		textFieldProdutoID.setFont(new Font("Arial", Font.PLAIN, 12));
 		textFieldProdutoID.setBounds(147, 11, 126, 34);
 		contentPane.add(textFieldProdutoID);
 		textFieldProdutoID.setColumns(10);
 		
 		btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnBuscar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -127,6 +129,7 @@ public class ExibeProduto extends JFrame {
 		contentPane.add(btnBuscar);
 		
 		textFieldNomeProduto = new JTextField();
+		textFieldNomeProduto.setFont(new Font("Arial", Font.PLAIN, 12));
 		textFieldNomeProduto.setEditable(false);
 		textFieldNomeProduto.setEditable(false);
 		textFieldNomeProduto.setBounds(34, 84, 340, 34);
@@ -134,17 +137,20 @@ public class ExibeProduto extends JFrame {
 		textFieldNomeProduto.setColumns(10);
 		
 		textFieldNomeCategoria = new JTextField();
+		textFieldNomeCategoria.setFont(new Font("Arial", Font.PLAIN, 12));
 		textFieldNomeCategoria.setEditable(false);
 		textFieldNomeCategoria.setBounds(437, 84, 372, 34);
 		contentPane.add(textFieldNomeCategoria);
 		textFieldNomeCategoria.setColumns(10);
 		
 		textFieldCorProduto = new JTextField();
+		textFieldCorProduto.setFont(new Font("Arial", Font.PLAIN, 12));
 		textFieldCorProduto.setEditable(false);
 		textFieldCorProduto.setBounds(34, 173, 233, 34);
 		contentPane.add(textFieldCorProduto);
 		
 		textAreaDescricaoProduto = new JTextArea();
+		textAreaDescricaoProduto.setFont(new Font("Arial", Font.PLAIN, 13));
 		textAreaDescricaoProduto.setEditable(false);
 		textAreaDescricaoProduto.setBounds(34, 313, 775, 173);
 		textAreaDescricaoProduto.setColumns(10);
@@ -157,7 +163,7 @@ public class ExibeProduto extends JFrame {
 		
 		lblCategoria = new JLabel("Categoria:");
 		lblCategoria.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblCategoria.setBounds(437, 58, 126, 14);
+		lblCategoria.setBounds(437, 58, 126, 15);
 		contentPane.add(lblCategoria);
 		
 		
@@ -168,6 +174,7 @@ public class ExibeProduto extends JFrame {
 //		carregarCategorias();
 		
 		btnMenu = new JButton("Menu");
+		btnMenu.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnMenu.setForeground(new Color(255, 255, 255));
 		btnMenu.setBackground(new Color(0, 0, 0));
 		btnMenu.addActionListener(new ActionListener() 
@@ -201,6 +208,7 @@ public class ExibeProduto extends JFrame {
 		contentPane.add(lblDesc);
 		
 		btnEnviar = new JButton("Enviar");
+		btnEnviar.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnEnviar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -238,7 +246,7 @@ public class ExibeProduto extends JFrame {
 				}
 			}
 		});
-		btnEnviar.setBounds(709, 506, 100, 30);
+		btnEnviar.setBounds(709, 506, 100, 44);
 		btnEnviar.setVisible(false);
 		contentPane.add(btnEnviar);
 		
@@ -252,11 +260,13 @@ public class ExibeProduto extends JFrame {
 		contentPane.add(lblCorProduto);
 		
 		textFieldMarcaProduto = new JTextField();
+		textFieldMarcaProduto.setFont(new Font("Arial", Font.PLAIN, 12));
 		textFieldMarcaProduto.setEditable(false);
 		textFieldMarcaProduto.setBounds(305, 173, 239, 34);
 		contentPane.add(textFieldMarcaProduto);
 		
 		textFieldCondicaoProduto = new JTextField();
+		textFieldCondicaoProduto.setFont(new Font("Arial", Font.PLAIN, 12));
 		textFieldCondicaoProduto.setEditable(false);
 		textFieldCondicaoProduto.setBounds(576, 173, 233, 34);
 		contentPane.add(textFieldCondicaoProduto);
@@ -273,7 +283,7 @@ public class ExibeProduto extends JFrame {
 		comboBoxCondicaoProduto.setVisible(false);
 		contentPane.add(comboBoxCondicaoProduto);
 		
-		JLabel lblCondicaoProduto = new JLabel("Condicao:");
+		JLabel lblCondicaoProduto = new JLabel("Condição:");
 		lblCondicaoProduto.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblCondicaoProduto.setBounds(576, 151, 87, 14);
 		contentPane.add(lblCondicaoProduto);

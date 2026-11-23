@@ -42,7 +42,7 @@ public class AnuncioController
 		ResultSet rs = ps.executeQuery();
 		if(rs.next())
 		{
-			anu.setValor(rs.getString("valor"));
+			anu.setValor(rs.getDouble("valor"));
 			anu.setStatus(rs.getString("status"));
 		}
 		rs.close();
@@ -63,7 +63,7 @@ public class AnuncioController
 			Anuncio anu = new Anuncio();
 				 
 			anu.setId(rs.getInt("id"));
-			anu.setValor(rs.getString("valor"));
+			anu.setValor(rs.getDouble("valor"));
 			anu.setStatus(rs.getString("status"));
 				
 			lista.add(anu);
@@ -80,7 +80,7 @@ public class AnuncioController
 		Connection conn = gDao.getConnection();
 		String sql = "UPDATE anuncio SET valor = ?, status = ? WHERE id = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, anu.getValor());
+		ps.setDouble(1, anu.getValor());
 		ps.setString(2, anu.getStatus());
 		ps.setInt(3, anu.getId());
 		ps.execute();

@@ -77,7 +77,7 @@ public class CadastroProduto extends JFrame {
 		
 		JLabel lblNomeProduto = new JLabel("Nome:");
 		lblNomeProduto.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblNomeProduto.setBounds(55, 70, 46, 14);
+		lblNomeProduto.setBounds(55, 75, 46, 14);
 		contentPane.add(lblNomeProduto);
 		
 		textAreaDescricaoProduto = new JTextArea();
@@ -98,11 +98,11 @@ public class CadastroProduto extends JFrame {
 		
 		JLabel lblCategoriaProduto = new JLabel("Categoria:");
 		lblCategoriaProduto.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblCategoriaProduto.setBounds(461, 70, 89, 14);
+		lblCategoriaProduto.setBounds(461, 73, 89, 19);
 		contentPane.add(lblCategoriaProduto);
 		
 		JButton btnNewButton = new JButton("Cadastrar Produto");
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try 
@@ -136,10 +136,11 @@ public class CadastroProduto extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(589, 510, 168, 29);
+		btnNewButton.setBounds(589, 505, 168, 45);
 		contentPane.add(btnNewButton);
 		
 		JButton btnMenu = new JButton("Menu");
+		btnMenu.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnMenu.setForeground(new Color(255, 255, 255));
 		btnMenu.setBackground(new Color(0, 0, 0));
 		btnMenu.addActionListener(new ActionListener() 
@@ -174,7 +175,7 @@ public class CadastroProduto extends JFrame {
 		
 		JLabel lblCondicaoProduto = new JLabel("Condição:");
 		lblCondicaoProduto.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblCondicaoProduto.setBounds(539, 165, 89, 14);
+		lblCondicaoProduto.setBounds(539, 165, 89, 17);
 		contentPane.add(lblCondicaoProduto);
 		
 		textFieldCorProduto = new JTextField();
@@ -185,7 +186,7 @@ public class CadastroProduto extends JFrame {
 		
 		JLabel lblCorProduto = new JLabel("Cor:");
 		lblCorProduto.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblCorProduto.setBounds(55, 165, 46, 14);
+		lblCorProduto.setBounds(55, 166, 46, 14);
 		contentPane.add(lblCorProduto);
 		
 		textFieldMarcaProduto = new JTextField();
@@ -196,7 +197,7 @@ public class CadastroProduto extends JFrame {
 		
 		JLabel lblMarcaProduto = new JLabel("Marca:");
 		lblMarcaProduto.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblMarcaProduto.setBounds(296, 165, 46, 14);
+		lblMarcaProduto.setBounds(296, 166, 46, 14);
 		contentPane.add(lblMarcaProduto);
 
 	}

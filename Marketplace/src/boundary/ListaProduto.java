@@ -25,6 +25,7 @@ import controller.CategoriaController;
 import controller.ProdutoController;
 import entity.Categoria;
 import entity.Produto;
+import java.awt.Font;
 
 public class ListaProduto extends JFrame {
 
@@ -65,6 +66,7 @@ public class ListaProduto extends JFrame {
 		contentPane.add(scrollPane);
 
 		JButton btnMenu = new JButton("Menu");
+		btnMenu.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnMenu.setForeground(new Color(255, 255, 255));
 		btnMenu.setBackground(new Color(0, 0, 0));
 		btnMenu.addActionListener(new ActionListener() 
@@ -93,6 +95,7 @@ public class ListaProduto extends JFrame {
 		contentPane.add(btnMenu);
 		
 		table = new JTable();
+		table.setFont(new Font("Arial", Font.PLAIN, 12));
 		table.setRowHeight(32);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {},
@@ -114,6 +117,7 @@ public class ListaProduto extends JFrame {
 		scrollPane.setViewportView(table);
 
 		btnNewButton = new JButton("Listar Produtos");
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				try {
@@ -123,7 +127,7 @@ public class ListaProduto extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(10, 12, 156, 23);
+		btnNewButton.setBounds(10, 6, 156, 34);
 		contentPane.add(btnNewButton);
 	}
 
