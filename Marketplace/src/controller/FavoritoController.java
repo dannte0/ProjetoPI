@@ -10,6 +10,7 @@ import java.util.List;
 import dao.GenericDao;
 import entity.Favorito;
 
+
 public class FavoritoController 
 {
     GenericDao gDao = new GenericDao();
