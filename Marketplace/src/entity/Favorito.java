@@ -3,13 +3,13 @@ package entity;
 public class Favorito 
 {
 	private int id_usuario;
-	private int anuncioProdutoIdProduto;
+	private int id_anuncio;
 
 	
 	public Favorito() 
 	{
 		this.id_usuario = 0;
-		this.anuncioProdutoIdProduto = 0;
+		this.id_anuncio = 0;
 	}
 
 	
@@ -27,12 +27,12 @@ public class Favorito
 	
 	public int getAnuncioProdutoIdProduto() 
 	{
-		return anuncioProdutoIdProduto;
+		return id_anuncio;
 	}
 
 	
-	public void setAnuncioProdutoIdProduto(int anuncioProdutoIdProduto) 
+	public void setAnuncioProdutoIdProduto(int id_anuncio) 
 	{
-		this.anuncioProdutoIdProduto = anuncioProdutoIdProduto;
+		this.id_anuncio = id_anuncio;
 	}
 }

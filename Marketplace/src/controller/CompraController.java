@@ -18,7 +18,7 @@ public class CompraController
     public void createCompra(Compra com) throws ClassNotFoundException, SQLException 
     {
         Connection conn = gDao.getConnection();
-        String sql = "INSERT INTO Compra (AnuncioID_Produto, Data_Hora, UsuarioIDComprador) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Compra (id_anuncio, Data_Hora, id_usuario) VALUES (?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setInt(1, com.getAnuncioIdProduto());
@@ -33,16 +33,16 @@ public class CompraController
     public Compra findOneCompra(Compra com) throws ClassNotFoundException, SQLException
     {
         Connection conn = gDao.getConnection();
-        String sql = "SELECT AnuncioID_Produto, Data_Hora, UsuarioIDComprador FROM Compra WHERE AnuncioID_Produto = ?";
+        String sql = "SELECT id_anuncio, Data_Hora, id_usuario FROM Compra WHERE id_anuncio = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
 
         ps.setInt(1, com.getAnuncioIdProduto());
         ResultSet rs = ps.executeQuery();
         if(rs.next())
         {
-            com.setAnuncioIdProduto(rs.getInt("AnuncioID_Produto"));
+            com.setAnuncioIdProduto(rs.getInt("id_anuncio"));
             com.setDataHora(rs.getTimestamp("Data_Hora").toLocalDateTime());
-            com.setUsuarioIdComprador(rs.getInt("UsuarioIDComprador"));
+            com.setUsuarioIdComprador(rs.getInt("id_usuario"));
         }
         rs.close();
         ps.close();
@@ -54,16 +54,16 @@ public class CompraController
     {
         List<Compra> lista = new ArrayList<>();
         Connection conn = gDao.getConnection();
-        String sql = "SELECT AnuncioID_Produto, Data_Hora, UsuarioIDComprador FROM Compra";
+        String sql = "SELECT id_anuncio, Data_Hora, id_usuario FROM Compra";
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while(rs.next())
         {
             Compra com = new Compra();
                  
-            com.setAnuncioIdProduto(rs.getInt("AnuncioID_Produto"));
+            com.setAnuncioIdProduto(rs.getInt("id_anuncio"));
             com.setDataHora(rs.getTimestamp("Data_Hora").toLocalDateTime());
-            com.setUsuarioIdComprador(rs.getInt("UsuarioIDComprador"));
+            com.setUsuarioIdComprador(rs.getInt("id_usuario"));
                 
             lista.add(com);
         }
@@ -77,7 +77,7 @@ public class CompraController
     public void updateCompra(Compra com) throws ClassNotFoundException, SQLException
     {
         Connection conn = gDao.getConnection();
-        String sql = "UPDATE Compra SET Data_Hora = ?, UsuarioIDComprador = ? WHERE AnuncioID_Produto = ?";
+        String sql = "UPDATE Compra SET Data_Hora = ?, id_usuario = ? WHERE id_anuncio = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setTimestamp(1, Timestamp.valueOf(com.getDataHora()));
@@ -92,7 +92,7 @@ public class CompraController
     public void deleteCompra(Compra com) throws ClassNotFoundException, SQLException
     {
         Connection conn = gDao.getConnection();
-        String sql = "DELETE FROM Compra WHERE AnuncioID_Produto = ?";
+        String sql = "DELETE FROM Compra WHERE id_anuncio = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, com.getAnuncioIdProduto());
         ps.execute();

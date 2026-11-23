@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 
 public class Compra 
 {
-	private int id_anucio;
+	private int id_anuncio;
 	private LocalDateTime dataHora;
 	private int id_usuario;
 
 	
 	public Compra() 
 	{
-		this.id_anucio = 0;
+		this.id_anuncio = 0;
 		this.dataHora = LocalDateTime.now();
 		this.id_usuario = 0;
 	}
@@ -19,13 +19,13 @@ public class Compra
 	
 	public int getAnuncioIdProduto() 
 	{
-		return id_anucio;
+		return id_anuncio;
 	}
 
 	
-	public void setAnuncioIdProduto(int id_anucio) 
+	public void setAnuncioIdProduto(int id_anuncio) 
 	{
-		this.id_anucio = id_anucio;
+		this.id_anuncio = id_anuncio;
 	}
 
 	

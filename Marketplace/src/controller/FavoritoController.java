@@ -17,7 +17,7 @@ public class FavoritoController
     public void createFavorito(Favorito fav) throws ClassNotFoundException, SQLException 
     {
         Connection conn = gDao.getConnection();
-        String sql = "INSERT INTO Favorito (UsuarioID, AnuncioProdutoID_Produto) VALUES (?, ?)";
+        String sql = "INSERT INTO Favorito (id_usuario, id_anuncio) VALUES (?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setInt(1, fav.getUsuarioId());
@@ -32,7 +32,7 @@ public class FavoritoController
     {
         List<Favorito> lista = new ArrayList<>();
         Connection conn = gDao.getConnection();
-        String sql = "SELECT UsuarioID, AnuncioProdutoID_Produto FROM Favorito WHERE UsuarioID = ?";
+        String sql = "SELECT id_usuario, id_anuncio FROM Favorito WHERE id_usuario = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, usuarioId);
         ResultSet rs = ps.executeQuery();
@@ -40,8 +40,8 @@ public class FavoritoController
         while(rs.next())
         {
             Favorito fav = new Favorito();
-            fav.setUsuarioId(rs.getInt("UsuarioID"));
-            fav.setAnuncioProdutoIdProduto(rs.getInt("AnuncioProdutoID_Produto"));
+            fav.setUsuarioId(rs.getInt("id_usuario"));
+            fav.setAnuncioProdutoIdProduto(rs.getInt("id_anuncio"));
             lista.add(fav);
         }
          
@@ -55,15 +55,15 @@ public class FavoritoController
     {
         List<Favorito> lista = new ArrayList<>();
         Connection conn = gDao.getConnection();
-        String sql = "SELECT UsuarioID, AnuncioProdutoID_Produto FROM Favorito";
+        String sql = "SELECT id_usuario, id_anuncio FROM Favorito";
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         
         while(rs.next())
         {
             Favorito fav = new Favorito();
-            fav.setUsuarioId(rs.getInt("UsuarioID"));
-            fav.setAnuncioProdutoIdProduto(rs.getInt("AnuncioProdutoID_Produto"));
+            fav.setUsuarioId(rs.getInt("id_usuario"));
+            fav.setAnuncioProdutoIdProduto(rs.getInt("id_anuncio"));
             lista.add(fav);
         }
          
@@ -76,7 +76,7 @@ public class FavoritoController
     public void deleteFavorito(Favorito fav) throws ClassNotFoundException, SQLException
     {
         Connection conn = gDao.getConnection();
-        String sql = "DELETE FROM Favorito WHERE UsuarioID = ? AND AnuncioProdutoID_Produto = ?";
+        String sql = "DELETE FROM Favorito WHERE id_usuario = ? AND id_anuncio = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setInt(1, fav.getUsuarioId());
