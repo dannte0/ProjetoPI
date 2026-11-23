@@ -4,13 +4,11 @@ public class Categoria
 {
 	private int id;
 	private String nome;
-	private String descricao;
 	
 	public Categoria()
 	{
 		this.id = 0;
 		this.nome = "";
-		this.descricao = "";
 	}
 	
 	public int getId() 
@@ -31,16 +29,6 @@ public class Categoria
 	public void setNome(String nome) 
 	{
 		this.nome = nome;
-	}
-	
-	public String getDescricao() 
-	{
-		return descricao;
-	}
-	
-	public void setDescricao(String descricao) 
-	{
-		this.descricao = descricao;
 	}
 
 	@Override
